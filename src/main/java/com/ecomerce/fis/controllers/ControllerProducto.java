@@ -38,6 +38,15 @@ public class ControllerProducto {
         }
     }
 
+    @GetMapping("productos/{id}")
+    public ResponseEntity<Producto> getProductoById(@PathVariable Long id) {
+        Producto producto = repo.findById(id).orElse(null);
+        if (producto != null) {
+            return new ResponseEntity<>(producto, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
     @PostMapping("productos")
     public String post(@RequestParam("imagen") MultipartFile file,
                        @RequestParam("producto") String productoJson,
