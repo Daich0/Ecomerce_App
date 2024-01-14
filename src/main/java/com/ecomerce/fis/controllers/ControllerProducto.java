@@ -52,6 +52,8 @@ public class ControllerProducto {
                        @RequestParam("producto") String productoJson,
                        @RequestParam("marca") String marca,
                        @RequestParam("modelo") String modelo,
+                       @RequestParam("alto") String alto,
+                       @RequestParam("ancho") String ancho,
                        @RequestParam("garantia") String garantia,
                        @RequestParam("color") String color,
                        @RequestParam("peso") String peso,
@@ -62,6 +64,8 @@ public class ControllerProducto {
             producto.setProducto(productoJson);
             producto.setMarca(marca);
             producto.setModelo(modelo);
+            producto.setAlto(alto);
+            producto.setAncho(ancho);
             producto.setGarantia(garantia);
             producto.setColor(color);
             producto.setPeso(peso);
@@ -71,31 +75,36 @@ public class ControllerProducto {
             repo.save(producto);
             return "Grabado";
         } catch (IOException e) {
+            System.out.println("Error processing image or product data"+ e);
             return "Error al procesar la imagen o los datos del producto";
         }
     }
     @PutMapping("productos/{id}")
     public String updateProducto(@PathVariable Long id,
-                                 @RequestParam(value = "file", required = false) MultipartFile file,
-                                 @RequestParam("producto") String productoJson,
-                                 @RequestParam("marca") String marca,
-                                 @RequestParam("modelo") String modelo,
-                                 @RequestParam("garantia") String garantia,
-                                 @RequestParam("color") String color,
-                                 @RequestParam("peso") String peso,
-                                 @RequestParam("precio") String precio) {
+                                 @RequestParam(value = "imagen", required = false) MultipartFile file,
+                                 @RequestParam(value ="producto", required = false) String producto,
+                                 @RequestParam(value ="marca", required = false) String marca,
+                                 @RequestParam(value ="modelo", required = false) String modelo,
+                                 @RequestParam(value ="alto", required = false) String alto,
+                                 @RequestParam(value ="ancho", required = false) String ancho,
+                                 @RequestParam(value ="garantia", required = false) String garantia,
+                                 @RequestParam(value ="color", required = false) String color,
+                                 @RequestParam(value ="peso", required = false) String peso,
+                                 @RequestParam(value ="precio", required = false) String precio) {
         try {
             Producto productoToUpdate = repo.findById(id).orElse(null);
             if (productoToUpdate != null) {
-                productoToUpdate.setProducto(productoJson);
+                productoToUpdate.setProducto(producto);
                 productoToUpdate.setMarca(marca);
                 productoToUpdate.setModelo(modelo);
+                productoToUpdate.setAlto(alto);
+                productoToUpdate.setAncho(ancho);
                 productoToUpdate.setGarantia(garantia);
                 productoToUpdate.setColor(color);
                 productoToUpdate.setPeso(peso);
                 productoToUpdate.setPrecio(precio);
 
-                if (file != null) {
+                if (file != null  && !file.isEmpty()) {
                     byte[] imagenData = file.getBytes();
                     productoToUpdate.setImagen(imagenData); // Actualizar la imagen si se proporciona
                 }

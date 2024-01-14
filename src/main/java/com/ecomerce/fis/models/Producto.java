@@ -28,6 +28,16 @@ public class Producto {
     @Setter
     private String modelo;
 
+    @Column (name ="alto")
+    @Getter
+    @Setter
+    private String alto;
+
+    @Column (name ="ancho")
+    @Getter
+    @Setter
+    private String ancho;
+
     @Column (name ="garantia")
     @Getter
     @Setter

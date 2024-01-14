@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class ControllerPersona {
 
     @Autowired
@@ -34,9 +35,8 @@ public class ControllerPersona {
 
     Persona updatePersona = repo.findById(id).get();
     updatePersona.setNombre(persona.getNombre());
-    updatePersona.setTelefono(persona.getTelefono());
     updatePersona.setRol(persona.getRol());
-    updatePersona.setUsername(persona.getUsername());
+    updatePersona.setEmail(persona.getEmail());
     updatePersona.setPassword(persona.getPassword());
 
 
