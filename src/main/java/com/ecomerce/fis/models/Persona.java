@@ -19,19 +19,16 @@ public class Persona {
     @Setter
     private String nombre;
 
-    @Column (name ="telefono")
-    @Getter
-    @Setter
-    private String telefono;
+
     @Column (name ="rol")
     @Getter
     @Setter
     private String rol;
 
-    @Column (name ="username")
+    @Column (name ="email")
     @Getter
     @Setter
-    private String username;
+    private String email;
 
     @Column (name ="password")
     @Getter
