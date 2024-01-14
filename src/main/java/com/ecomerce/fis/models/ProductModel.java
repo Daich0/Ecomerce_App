@@ -2,13 +2,14 @@ package com.ecomerce.fis.models;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import org.springframework.data.annotation.Id;
+//import org.springframework.data.annotation.Id;
 
 @Entity
-@Table(name="producto3")
+@Table(name="producto2")
 public class ProductModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
     private Long id;
 
     @Column
@@ -37,6 +38,25 @@ public class ProductModel {
 
     @Column
     private String profundidad;
+    @Column
+    private String voltaje;
+
+    @Column
+    private String precio;
+
+    @Column
+    private String nombre;
+
+    public String getAncho() {
+        return ancho;
+    }
+
+    public void setAncho(String ancho) {
+        this.ancho = ancho;
+    }
+
+    @Column
+    private String ancho;
 
     public Long getId() {
         return id;
@@ -141,14 +161,5 @@ public class ProductModel {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-    @Column
-    private String voltaje;
-
-    @Column
-    private String precio;
-
-    @Column
-    private String nombre;
 
 }
